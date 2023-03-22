@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const userSchema = require('');
 
 const userSchema = new Schema(
     {
@@ -17,6 +16,19 @@ const userSchema = new Schema(
         match: [/.+@.+\..+/],
         max_length: 50,
       },
+      thoughts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "thought"
+        }
+      ],
+      friends: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "user"
+        }
+      ],
+
     }
   );
   
