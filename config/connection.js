@@ -1,15 +1,11 @@
-const mongoose = require("mongoose");
+const { connect, connection } = require('mongoose');
 
-module.exports = {
-  start: async () => {
-    const url = "";
-    await mongoose.connect(url, {
-      useFindAndModify: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+const connectionString =
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialApi';
 
-    await mongoose.set("debug", true);
-    return mongoose;
-  },
-};
+connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+module.exports = connection;

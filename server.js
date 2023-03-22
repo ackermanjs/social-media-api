@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = require("./routes");
-const connect = require("./config/connection.js").start();
+const db = require('./config/connection');
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -9,8 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-const PORT = 3001;
 
-app.listen(PORT, () => {
-  console.log("Connected to localhost:" + PORT);
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server for running on port ${PORT}!`);
+  });
 });
