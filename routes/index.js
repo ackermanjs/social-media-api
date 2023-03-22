@@ -1,9 +1,9 @@
 const router = require("express").Router();
-
+const apiRoutes = require("./api");
 // router.use
 
-router.get("/", (req, res) => {
-  res.json({ status: "success" });
-});
-
+router.use("/api", apiRoutes);
+router.use((req, res) => {
+  return res.send("Check your routes!")
+})
 module.exports = router;
